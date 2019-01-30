@@ -14,7 +14,7 @@ import org.bukkit.Material
 class DreamDropParty : KotlinPlugin() {
 
     companion object {
-        const val PREFIX = "§8[§a§lD§b§lr§5§lo§c§lp §2§lP§3§la§d§lr§4§lt§6§ly§8]§e"
+        const val PREFIX = "§8[§a§lD§b§lr§5§lo§c§lp§2§lP§3§la§d§lr§4§lt§6§ly§8]§e"
     }
 
     val items = mutableMapOf<ItemStack, Double>()

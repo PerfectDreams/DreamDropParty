@@ -12,6 +12,7 @@ import org.bukkit.Bukkit
 import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
 import net.perfectdreams.dreamcore.utils.chance
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 
 class DropParty(val m: DreamDropParty) : ServerEvent("Drop Party", "/dropparty") {
@@ -56,8 +57,10 @@ class DropParty(val m: DreamDropParty) : ServerEvent("Drop Party", "/dropparty")
 
                 switchContext(SynchronizationContext.SYNC)
                 m.items.forEach { item, chance ->
-                    if (chance(chance)) {
-                        location.world.dropItem(location, item)
+                    repeat(world.players.size) {
+                        if (chance(chance)) {
+                            location.world.dropItem(location, item)
+                        }
                     }
                 }
                 switchContext(SynchronizationContext.ASYNC)
@@ -69,10 +72,18 @@ class DropParty(val m: DreamDropParty) : ServerEvent("Drop Party", "/dropparty")
             bossBar.removeAll()
             Bukkit.broadcastMessage("${DreamDropParty.PREFIX} Evento Drop Party acabou! Obrigado a todos que participaram!")
 
+            running = false
+
             waitFor(100)
+
             switchContext(SynchronizationContext.SYNC)
+
             world.players.forEach {
                 it.teleport(DreamCore.dreamConfig.spawn)
+            }
+
+            world.entities.filter { it.type == EntityType.DROPPED_ITEM }.forEach {
+                it.remove()
             }
         }
     }
