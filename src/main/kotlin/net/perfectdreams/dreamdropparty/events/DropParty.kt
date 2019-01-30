@@ -40,7 +40,7 @@ class DropParty(val m: DreamDropParty) : ServerEvent("Drop Party", "/dropparty")
         val bossBar = Bukkit.createBossBar("${color.toChatColor()}§lDrop Party!", color, BarStyle.SEGMENTED_20)
 
         scheduler().schedule(m) {
-            repeat(14) {
+            repeat(15) {
                 val color = BarColor.values().random()
                 bossBar.color = color
                 bossBar.title = "${color.toChatColor()}§lDrop Party!"
@@ -57,7 +57,7 @@ class DropParty(val m: DreamDropParty) : ServerEvent("Drop Party", "/dropparty")
                 switchContext(SynchronizationContext.SYNC)
                 m.items.forEach { item, chance ->
                     if (chance(chance)) {
-                        location.world.dropItemNaturally(location, item)
+                        location.world.dropItem(location, item)
                     }
                 }
                 switchContext(SynchronizationContext.ASYNC)
@@ -66,10 +66,14 @@ class DropParty(val m: DreamDropParty) : ServerEvent("Drop Party", "/dropparty")
                 waitFor(20)
             }
 
-            world.players.forEach { it.teleport(DreamCore.dreamConfig.spawn) }
             bossBar.removeAll()
-
             Bukkit.broadcastMessage("${DreamDropParty.PREFIX} Evento Drop Party acabou! Obrigado a todos que participaram!")
+
+            waitFor(100)
+            switchContext(SynchronizationContext.SYNC)
+            world.players.forEach {
+                it.teleport(DreamCore.dreamConfig.spawn)
+            }
         }
     }
 }
