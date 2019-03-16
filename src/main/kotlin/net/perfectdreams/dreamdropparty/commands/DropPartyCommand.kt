@@ -2,9 +2,9 @@ package net.perfectdreams.dreamdropparty.commands
 
 import net.perfectdreams.commands.annotation.Subcommand
 import net.perfectdreams.commands.bukkit.SparklyCommand
+import net.perfectdreams.commands.bukkit.SubcommandPermission
 import net.perfectdreams.dreamcore.utils.DreamUtils
 import net.perfectdreams.dreamcore.utils.blacklistedTeleport
-import net.perfectdreams.dreamcore.utils.commands.annotation.SubcommandPermission
 import net.perfectdreams.dreamdropparty.DreamDropParty
 import net.perfectdreams.dreamdropparty.utils.toWrapper
 import org.bukkit.entity.Player
