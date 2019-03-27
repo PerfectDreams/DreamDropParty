@@ -18,7 +18,7 @@ import org.bukkit.entity.Player
 class DropParty(val m: DreamDropParty) : ServerEvent("Drop Party", "/dropparty") {
 
     init {
-        this.requiredPlayers = 25
+        this.requiredPlayers = 20
         this.discordAnnouncementRole = "539979402143072267"
     }
 
