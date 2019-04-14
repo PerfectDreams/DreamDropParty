@@ -18,7 +18,8 @@ import org.bukkit.entity.Player
 class DropParty(val m: DreamDropParty) : ServerEvent("Drop Party", "/dropparty") {
 
     init {
-        this.requiredPlayers = 20
+        this.requiredPlayers = 25
+        this.delayBetween = 3600000 * 2 // 2 horas
         this.discordAnnouncementRole = "539979402143072267"
     }
 
@@ -73,8 +74,9 @@ class DropParty(val m: DreamDropParty) : ServerEvent("Drop Party", "/dropparty")
             Bukkit.broadcastMessage("${DreamDropParty.PREFIX} Evento Drop Party acabou! Obrigado a todos que participaram!")
 
             running = false
+            lastTime = System.currentTimeMillis()
 
-            waitFor(100)
+            waitFor(400)
 
             switchContext(SynchronizationContext.SYNC)
 
