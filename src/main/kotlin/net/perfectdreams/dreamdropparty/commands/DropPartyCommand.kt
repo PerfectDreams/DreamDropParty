@@ -15,7 +15,7 @@ class DropPartyCommand(val m: DreamDropParty) : SparklyCommand(arrayOf("droppart
     @Subcommand
     fun root(sender: Player) {
         if (!m.dropParty.running) {
-            sender.sendMessage("${DreamDropParty.PREFIX} Atualmente não há nenhum evento Drop Party rodando!")
+            sender.sendMessage("${DreamDropParty.PREFIX} Atualmente não há nenhum evento Drop Party acontecendo!")
             return
         }
 
